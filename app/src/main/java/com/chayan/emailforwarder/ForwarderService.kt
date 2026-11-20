@@ -60,10 +60,15 @@ class ForwarderService : Service() {
     private fun startMonitoringLoop() {
         serviceScope.launch {
             val prefs = getSharedPreferences("app_config", Context.MODE_PRIVATE)
-            val gmailAddress = prefs.getString("gmail_address", "chayan0000001@gmail.com") ?: ""
-            val gmailPassword = prefs.getString("gmail_password", "tzlerhnvdnxgaxuq") ?: ""
+            val gmailAddress = prefs.getString("gmail_address", "") ?: ""
+            val gmailPassword = prefs.getString("gmail_password", "") ?: ""
             val botToken = prefs.getString("bot_token", "9277450202:AAEVaqYpAkG0Mpz_a1V6RGZvSKo4RCU3M-Q") ?: ""
-            val groupId = prefs.getString("group_id", "-1004417279988") ?: ""
+            val groupId = prefs.getString("group_id", "") ?: ""
+
+            if (gmailAddress.isEmpty() || gmailPassword.isEmpty() || groupId.isEmpty()) {
+                sendLog("⚠️ Configuration missing: Please enter Gmail, App Password, and Group ID.")
+                return@launch
+            }
 
             val telegram = TelegramClient(botToken, groupId)
             sendLog("🟢 Bot started. Connecting to $gmailAddress...")

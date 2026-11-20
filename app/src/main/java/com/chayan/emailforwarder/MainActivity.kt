@@ -89,10 +89,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadPreferences() {
         val prefs = getSharedPreferences("app_config", Context.MODE_PRIVATE)
-        etGmailAddress.setText(prefs.getString("gmail_address", "chayan0000001@gmail.com"))
-        etGmailPassword.setText(prefs.getString("gmail_password", "tzlerhnvdnxgaxuq"))
+        etGmailAddress.setText(prefs.getString("gmail_address", ""))
+        etGmailPassword.setText(prefs.getString("gmail_password", ""))
         etBotToken.setText(prefs.getString("bot_token", "9277450202:AAEVaqYpAkG0Mpz_a1V6RGZvSKo4RCU3M-Q"))
-        etGroupId.setText(prefs.getString("group_id", "-1004417279988"))
+        etGroupId.setText(prefs.getString("group_id", ""))
     }
 
     private fun savePreferences() {
